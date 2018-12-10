@@ -1,1 +1,1 @@
-# Repossitory for inteview tasks
+# Repository for inteview tasks
