@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
@@ -19,8 +20,7 @@ public class Team {
     @GeneratedValue
     private Long id;
 
+    @NotNull
     @Column
     private String name;
-
-
 }

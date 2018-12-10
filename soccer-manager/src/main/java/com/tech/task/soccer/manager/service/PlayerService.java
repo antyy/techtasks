@@ -16,5 +16,7 @@ public interface PlayerService {
 
     List<Player> getAllPLayers();
 
-    List<Player> searchPlayers(String name, String position, Long teamId);
+    List<Player> searchPlayers(String name, Player.Position position, Long teamId);
+
+    List<Player> getAllPLayers(String name, Player.Position position, Long teamId);
 }

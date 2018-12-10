@@ -1,6 +1,9 @@
 package com.tech.task.soccer.manager.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
@@ -19,6 +22,9 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @ToString
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Player {
 
     @Id
@@ -28,7 +34,7 @@ public class Player {
     @Column
     private Instant birthday;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Team team;
 
     @Column

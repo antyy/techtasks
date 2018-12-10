@@ -3,6 +3,7 @@ package com.tech.task.soccer.manager.controller;
 import com.tech.task.soccer.manager.model.Player;
 import com.tech.task.soccer.manager.service.PlayerService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import javax.validation.Valid;
 
+@Slf4j
 @RestController
 @RequestMapping("/player")
 @RequiredArgsConstructor
@@ -30,15 +32,10 @@ public class PlayerController {
     }
 
     @GetMapping("/all")
-    public List<Player> getAll() {
-        return playerService.getAllPLayers();
-    }
-
-    @GetMapping("/search")
-    public List<Player> search(@RequestParam(required = true) String name,
-                               @RequestParam(required = false) String position,
-                               @RequestParam(required = false) Long teamID) {
-        return playerService.searchPlayers(name,position,teamID);
+    public List<Player> getAll(@RequestParam(required = false) String name,
+                               @RequestParam(required = false) Player.Position position,
+                               @RequestParam(required = false) Long teamId) {
+        return playerService.getAllPLayers(name,position,teamId);
     }
 
     @PostMapping
