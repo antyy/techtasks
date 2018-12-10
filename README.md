@@ -1,1 +1,1 @@
-# techtasks
+# Repossitory for inteview tasks
