@@ -11,6 +11,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -44,10 +45,17 @@ public class PlayerServiceImpl implements PlayerService {
         return repository.findAll();
     }
 
-    public List<Player> searchPlayers(String name, String position, long teamId) {
-        new PlayerSpecification("name", name);
-        return repository.findAll(Specification.where(new PlayerSpecification("name", name))
-                .or(new PlayerSpecification("position", position))
-                .or(new PlayerSpecification("team", teamId)));
+    @Override
+    public List<Player> searchPlayers(String name, String position, Long teamId) {
+
+        Specification specification = Specification.where( new PlayerSpecification("name", name));
+        if (position != null ){
+            specification = specification.or(new PlayerSpecification("position", position));
+        }
+        if (teamId != null){
+            specification = specification.or(new PlayerSpecification("team", teamId));
+        }
+
+        return repository.findAll(specification);
     }
 }
