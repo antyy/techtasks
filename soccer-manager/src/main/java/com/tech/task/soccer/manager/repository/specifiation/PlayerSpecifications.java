@@ -9,19 +9,19 @@ public class PlayerSpecifications {
     private PlayerSpecifications() {
     }
 
-    public static Specification<Player> nameEmptyOrEqualTo(String name) {
+    public static Specification<Player> nameIsEmptyOrEqualTo(String name) {
         return (root, query, criteriaBuilder) -> Optional.ofNullable(name)
                 .map(nameValue -> criteriaBuilder.equal(root.get("name"), nameValue))
                 .orElse(criteriaBuilder.conjunction());
     }
 
-    public static Specification<Player> positionEmptyOrEqualTo(Player.Position position) {
+    public static Specification<Player> positionIsEmptyOrEqualTo(Player.Position position) {
         return (root, query, criteriaBuilder) -> Optional.ofNullable(position)
                 .map(positionValue -> criteriaBuilder.equal(root.get("position"), positionValue))
                 .orElse(criteriaBuilder.conjunction());
     }
 
-    public static Specification<Player> teamEmptyOrEqualTo(Long teamId) {
+    public static Specification<Player> teamIdIsEmptyOrEqualTo(Long teamId) {
         return (root, query, criteriaBuilder) -> Optional.ofNullable(teamId)
                 .map(teamValue -> criteriaBuilder.equal(root.get("teamId"), teamValue))
                 .orElse(criteriaBuilder.conjunction());

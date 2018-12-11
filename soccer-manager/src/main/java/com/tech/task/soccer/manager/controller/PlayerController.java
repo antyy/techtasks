@@ -28,6 +28,7 @@ public class PlayerController {
 
     @GetMapping("/{id}")
     public Player getPlayer(@PathVariable Long id) {
+        log.info("Get player request. Id {} ", id);
         return playerService.findById(id);
     }
 
@@ -35,22 +36,26 @@ public class PlayerController {
     public List<Player> getAll(@RequestParam(required = false) String name,
                                @RequestParam(required = false) Player.Position position,
                                @RequestParam(required = false) Long teamId) {
+        log.info("Get all players request. Name = {}, position = {}, teamId = {}" ,name,position,teamId);
         return playerService.getAllPLayers(name, position, teamId);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Player createPlayer(@RequestBody @Valid Player player) {
+        log.info("Create new  player request. Player {} ", player);
         return playerService.createNewPlayer(player);
     }
 
     @DeleteMapping
     public void deleteUser(@RequestBody Long id) {
+        log.info("Delete player request. Id {} ", id);
         playerService.deletePlayer(id);
     }
 
     @PatchMapping
     public Player updatePlayer(@RequestBody @Valid Player player) {
+        log.info("Update  player request. Player {} ", player);
         return playerService.updatePlayer(player);
     }
 

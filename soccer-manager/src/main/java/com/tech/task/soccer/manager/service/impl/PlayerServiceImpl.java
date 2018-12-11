@@ -1,8 +1,8 @@
 package com.tech.task.soccer.manager.service.impl;
 
-import static com.tech.task.soccer.manager.repository.specifiation.PlayerSpecifications.nameEmptyOrEqualTo;
-import static com.tech.task.soccer.manager.repository.specifiation.PlayerSpecifications.positionEmptyOrEqualTo;
-import static com.tech.task.soccer.manager.repository.specifiation.PlayerSpecifications.teamEmptyOrEqualTo;
+import static com.tech.task.soccer.manager.repository.specifiation.PlayerSpecifications.nameIsEmptyOrEqualTo;
+import static com.tech.task.soccer.manager.repository.specifiation.PlayerSpecifications.positionIsEmptyOrEqualTo;
+import static com.tech.task.soccer.manager.repository.specifiation.PlayerSpecifications.teamIdIsEmptyOrEqualTo;
 
 import com.tech.task.soccer.manager.exception.PlayerNotFoundException;
 import com.tech.task.soccer.manager.model.Player;
@@ -45,8 +45,8 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public List<Player> getAllPLayers(String name, Player.Position position, Long teamId) {
-        return repository.findAll(Specification.where(nameEmptyOrEqualTo(name))
-                .and(positionEmptyOrEqualTo(position))
-                .and(teamEmptyOrEqualTo(teamId)));
+        return repository.findAll(Specification.where(nameIsEmptyOrEqualTo(name))
+                .and(positionIsEmptyOrEqualTo(position))
+                .and(teamIdIsEmptyOrEqualTo(teamId)));
     }
 }
