@@ -8,6 +8,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                sh 'cd ./soccer-manager'
                 sh 'mvn -B -DskipTests clean package'
             }
         }
