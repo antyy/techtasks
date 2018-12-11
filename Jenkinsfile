@@ -9,7 +9,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'ls -l'
-                sh 'cd ./soccer-manager'
+                dir 'soccer-manager'
                 sh 'ls -l'
                 sh 'mvn -B -DskipTests clean package'
             }
