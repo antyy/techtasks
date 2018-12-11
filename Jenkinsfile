@@ -11,8 +11,8 @@ pipeline {
                 sh 'ls -l'
                 dir('soccer-manager'){
                     sh 'ls -l'
+                    sh 'mvn -B -DskipTests clean package'
                 }
-                sh 'mvn -B -DskipTests clean package'
             }
         }
     }
