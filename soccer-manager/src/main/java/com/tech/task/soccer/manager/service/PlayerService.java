@@ -14,9 +14,5 @@ public interface PlayerService {
 
     void deletePlayer(Long id);
 
-    List<Player> getAllPLayers();
-
-    List<Player> searchPlayers(String name, Player.Position position, Long teamId);
-
     List<Player> getAllPLayers(String name, Player.Position position, Long teamId);
 }

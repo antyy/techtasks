@@ -9,13 +9,11 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.Instant;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -34,8 +32,8 @@ public class Player {
     @Column
     private Instant birthday;
 
-    @ManyToOne
-    private Team team;
+    @Column
+    private Long teamId;
 
     @Column
     private Integer playerNumber;

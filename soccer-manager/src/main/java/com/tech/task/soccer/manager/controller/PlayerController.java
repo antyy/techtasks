@@ -35,12 +35,12 @@ public class PlayerController {
     public List<Player> getAll(@RequestParam(required = false) String name,
                                @RequestParam(required = false) Player.Position position,
                                @RequestParam(required = false) Long teamId) {
-        return playerService.getAllPLayers(name,position,teamId);
+        return playerService.getAllPLayers(name, position, teamId);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Player createPlayer(@RequestBody  @Valid  Player player) {
+    public Player createPlayer(@RequestBody @Valid Player player) {
         return playerService.createNewPlayer(player);
     }
 
@@ -50,7 +50,7 @@ public class PlayerController {
     }
 
     @PatchMapping
-    public Player updatePlayer(@RequestBody  @Valid Player player) {
+    public Player updatePlayer(@RequestBody @Valid Player player) {
         return playerService.updatePlayer(player);
     }
 

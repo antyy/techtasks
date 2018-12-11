@@ -1,7 +1,6 @@
 package com.tech.task.soccer.manager.repository.specifiation;
 
 import com.tech.task.soccer.manager.model.Player;
-import com.tech.task.soccer.manager.model.Team;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.util.Optional;
@@ -22,9 +21,9 @@ public class PlayerSpecifications {
                 .orElse(criteriaBuilder.conjunction());
     }
 
-    public static Specification<Player> teamEmptyOrEqualTo(Team team) {
-        return (root, query, criteriaBuilder) -> Optional.ofNullable(team)
-                .map(teamValue -> criteriaBuilder.equal(root.get("team"), teamValue))
+    public static Specification<Player> teamEmptyOrEqualTo(Long teamId) {
+        return (root, query, criteriaBuilder) -> Optional.ofNullable(teamId)
+                .map(teamValue -> criteriaBuilder.equal(root.get("teamId"), teamValue))
                 .orElse(criteriaBuilder.conjunction());
     }
 }

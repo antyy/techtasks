@@ -12,8 +12,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .inMemoryAuthentication()
+        auth.inMemoryAuthentication()
                 .withUser("user")
                 .password("password")
                 .roles("USER")
@@ -24,7 +23,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/player/*", "/team/*").permitAll()
+                .antMatchers("/player/*").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic()
