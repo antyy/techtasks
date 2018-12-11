@@ -39,8 +39,8 @@ public class SoccerManagerApplicationTests {
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.name", is("John")))
-                .andExpect(jsonPath("$.teamId", is("1")))
+                .andExpect(jsonPath("$.teamId", is(1)))
                 .andExpect(jsonPath("$.position", is("CD")))
-                .andExpect(jsonPath("$.playerNumber", is("12")));
+                .andExpect(jsonPath("$.playerNumber", is(12)));
     }
 }
