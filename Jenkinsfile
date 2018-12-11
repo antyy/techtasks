@@ -8,12 +8,22 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'ls -l'
                 dir('soccer-manager'){
-                    sh 'ls -l'
                     sh 'mvn -B -DskipTests clean package'
                 }
             }
         }
+        stage('Test') {
+                    steps {
+                        dir('soccer-manager'){
+                            sh 'mvn test'
+                        }
+                    }
+                    post {
+                        always {
+                            junit 'soccer-manager/target/surefire-reports/*.xml'
+                        }
+                    }
+           }
     }
 }
