@@ -1,33 +1,39 @@
-package techtask;
+package techtask.logger.writer;
 
 import lombok.SneakyThrows;
+import techtask.logger.BinaryLoggable;
 
-import java.io.Closeable;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class RollingBinaryFileWriter implements Closeable {
+public class RollingBufferedBinaryFileWriter implements RollingBinaryFileWriter {
 
     private File file;
     private final String fileName;
     private final long rollingSize;
     private long currentSize = 0;
-    private FileOutputStream fileOutputStream;
+    private BufferedOutputStream fileOutputStream;
 
     @SneakyThrows
-    public RollingBinaryFileWriter(String fileName, long rollingSize) {
+    public RollingBufferedBinaryFileWriter(String fileName, long rollingSize) {
         file = new File(fileName);
         this.rollingSize = rollingSize;
         this.fileName = fileName;
-        fileOutputStream = new FileOutputStream(file);
+        fileOutputStream = new BufferedOutputStream(new FileOutputStream(file));
     }
 
 
     public void write(BinaryLoggable loggable) throws IOException {
-        byte[] data = loggable.toBytes();
+        write(loggable.toBytes());
+    }
+
+
+    public void write(byte[] data) throws IOException {
+
         currentSize += data.length;
         if (currentSize > rollingSize) {
             rollOver();
@@ -50,18 +56,17 @@ public class RollingBinaryFileWriter implements Closeable {
 
         file = new File(fileName);
         fileOutputStream.close();
-        fileOutputStream = new FileOutputStream(file);//TODO: check what happens if proceed without reassigning output stream
+        fileOutputStream = new BufferedOutputStream(new FileOutputStream(file));//TODO: check what happens if proceed without reassigning output stream
     }
 
     private File findNewRollOverFileName() throws IOException {
 
         Path directory = Path.of(fileName).getParent();
-        String name = directory.getFileName().toString();
+        String name = Path.of(fileName).getFileName().toString();
         long index = Files.walk(directory, 1)
                 .map(Path::getFileName)
                 .map(Path::toString)
                 .filter(t -> t.startsWith(name)).count();
-
         return new File(directory.resolve(name + index).toString());
     }
 

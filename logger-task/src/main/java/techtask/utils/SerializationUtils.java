@@ -1,4 +1,4 @@
-package techtask;
+package techtask.utils;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

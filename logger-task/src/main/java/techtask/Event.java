@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import techtask.logger.BinaryLoggable;
+import techtask.utils.SerializationUtils;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -22,7 +24,7 @@ public class Event implements Serializable, BinaryLoggable {
     public Event(Event other) {
         this.intValue = other.intValue;
         this.longValue = other.longValue;
-        this.stringValue = new String(other.stringValue);
+        this.stringValue = other.stringValue;
     }
 
     private Integer intValue = 6;
@@ -31,15 +33,6 @@ public class Event implements Serializable, BinaryLoggable {
 
     @Override
     public byte[] toBytes() throws IOException {
-//        byte[] stringBytes = stringValue.getBytes();
-//        int buffSize = 4 + stringBytes.length + 4 + 8;
-//
-//        return ByteBuffer.allocate(buffSize)
-//                .putInt(stringBytes.length)
-//                .putInt(intValue)
-//                .putLong(longValue)
-//                .put(stringBytes)
-//                .array();
         return SerializationUtils.toByteArray(this);
     }
 
@@ -50,10 +43,8 @@ public class Event implements Serializable, BinaryLoggable {
             this.setIntValue(other.intValue);
             this.setLongValue(other.getLongValue());
             this.setStringValue(other.getStringValue());
-
         } catch (ClassNotFoundException c) {
             throw new RuntimeException(c);
         }
-
     }
 }

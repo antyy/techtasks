@@ -1,4 +1,4 @@
-package techtask;
+package techtask.logger;
 
 import java.io.Closeable;
 import java.io.File;

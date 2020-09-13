@@ -1,7 +1,8 @@
-package techtask;
+package techtask.logger;
+
+import techtask.logger.BinaryLogger;
 
 import java.io.IOException;
-import java.io.Serializable;
 
 /**
  * BinaryLoggable represents an entity that can be logged by {@link

@@ -27,7 +27,4 @@ class EventTest {
         assertEquals(expected, c);
     }
 
-    @Test
-    void fromBytes() {
-    }
 }
