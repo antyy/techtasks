@@ -8,6 +8,7 @@ import techtask.logger.impl.ConcurrentNotBlockingBinaryLogger;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -18,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static techtask.utils.TestUtils.cleanUpDirectory;
 
 public class ConcurrentTest {
-    private final String fileName = "/home/ivan/Development/Git/techtasks/logger-task/src/test/resources/concurrent/binary-logger.log";
+    private final String fileName = Paths.get("src/test/resources/concurrent/binary-logger.log").toAbsolutePath().toString();
     private static final long FILE_SIZE = 1000 * 1024 * 1024;
     private static final long SMALL_FILE = 10240;
 

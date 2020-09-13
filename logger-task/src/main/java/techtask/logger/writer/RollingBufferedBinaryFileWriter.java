@@ -56,7 +56,7 @@ public class RollingBufferedBinaryFileWriter implements RollingBinaryFileWriter 
 
         file = new File(fileName);
         fileOutputStream.close();
-        fileOutputStream = new BufferedOutputStream(new FileOutputStream(file));//TODO: check what happens if proceed without reassigning output stream
+        fileOutputStream = new BufferedOutputStream(new FileOutputStream(file));
     }
 
     private File findNewRollOverFileName() throws IOException {

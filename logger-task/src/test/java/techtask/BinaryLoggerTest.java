@@ -10,6 +10,7 @@ import techtask.utils.TestUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,7 +23,7 @@ import static techtask.utils.TestUtils.readObject;
 
 class BinaryLoggerTest {
     private BinaryLogger<Event> logger;
-    private final String fileName = "/home/ivan/Development/Git/techtasks/logger-task/src/test/resources/some/binary-logger.log";
+    private final String fileName = Paths.get("src/test/resources/logger/binary-logger.log").toAbsolutePath().toString();
     private final Event expectedLoggable = new Event(33, 55L, "SSSS");
     private final List<Event> loggableList = Stream.of("sfdsfsf", "dfsdf", "we32e23", "dd23e", "kkjd9dssf")
             .map(t -> new Event(t.length(), t.length() + 4L, t))

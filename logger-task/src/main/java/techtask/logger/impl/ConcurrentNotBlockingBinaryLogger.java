@@ -19,22 +19,30 @@ import java.util.concurrent.LinkedBlockingDeque;
 import static java.util.Objects.nonNull;
 
 public class ConcurrentNotBlockingBinaryLogger<T extends BinaryLoggable> implements BinaryLogger<T> {
+    private static final int DEFAULT_QUEUE_SIZE = 1000000;
     private volatile boolean isWorking = true;
     private final RollingBinaryFileWriter rollingBinaryFileWriter;
     private final BinaryLoggerReader<T> binaryLoggerFileReader;
-    BlockingQueue<BinaryLoggable> linkedBlockingDeque = new LinkedBlockingDeque<>(1000000);
-    ExecutorService executorService = Executors.newSingleThreadExecutor();
+    private final BlockingQueue<BinaryLoggable> linkedBlockingDeque;
+    private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
     public ConcurrentNotBlockingBinaryLogger(String fileName, long fileSize) {
+        this(fileName, fileSize, DEFAULT_QUEUE_SIZE);
 
+    }
+
+    public ConcurrentNotBlockingBinaryLogger(String fileName, long fileSize, int queueSize) {
+        linkedBlockingDeque = new LinkedBlockingDeque<>(queueSize);
         rollingBinaryFileWriter = new RollingBufferedBinaryFileWriter(fileName, fileSize);
         executorService.submit((Runnable) this::write);
         binaryLoggerFileReader = new BinaryLoggerFileReader<>();
     }
 
+
     public ConcurrentNotBlockingBinaryLogger(RollingBinaryFileWriter rollingBinaryFileWriter, BinaryLoggerReader<T> binaryLoggerFileReader) {
         this.rollingBinaryFileWriter = rollingBinaryFileWriter;
         this.binaryLoggerFileReader = binaryLoggerFileReader;
+        linkedBlockingDeque = new LinkedBlockingDeque<>(DEFAULT_QUEUE_SIZE);
         executorService.submit((Runnable) this::write);
     }
 

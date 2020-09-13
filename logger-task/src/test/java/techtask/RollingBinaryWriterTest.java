@@ -9,6 +9,7 @@ import techtask.logger.writer.RollingBufferedBinaryFileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -17,7 +18,7 @@ import static java.util.stream.Collectors.toList;
 import static techtask.utils.TestUtils.cleanUpDirectory;
 
 class RollingBinaryWriterTest {
-    private final String fileName = "/home/ivan/Development/Git/techtasks/logger-task/src/test/resources/rolling_logger/binary-logger.log";
+    private final String fileName = Paths.get("src/test/resources/rolling_logger/binary-logger.log").toAbsolutePath().toString();
     private RollingBinaryFileWriter rollingBinaryFileWrite;
     private final List<Event> events = IntStream.range(0, 10)
             .mapToObj(t -> new Event(t, 55L, "SSSS"))
