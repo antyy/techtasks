@@ -50,12 +50,14 @@ public class RollingBufferedBinaryFileWriter implements RollingBinaryFileWriter 
     private void rollOver() throws IOException {
         File newFile = findNewRollOverFileName();
 
-        if (!file.renameTo(newFile)) {
-            throw new IOException("Could not roll over file");
-        }
+
 
         file = new File(fileName);
         fileOutputStream.close();
+
+        if (!file.renameTo(newFile)) {
+            throw new IOException("Could not roll over file");
+        }
         fileOutputStream = new BufferedOutputStream(new FileOutputStream(file));
     }
 
